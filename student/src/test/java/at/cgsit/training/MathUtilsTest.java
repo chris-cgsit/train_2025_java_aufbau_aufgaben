@@ -9,6 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class MathUtilsTest {
 
     @Test
+    void testWithNull() {
+        int i = MathUtils.sumPositive(null);
+        assertEquals(0, i);
+    }
+
+    @Test
     void testSumPositive() {
         List<Integer> list = List.of(-5, 3, 0, 8, -1);
         int result = MathUtils.sumPositive(list);

@@ -15,7 +15,7 @@ class Exercise01_FilterAdultsTest {
         List<Person> persons = List.of(
                 new Person("Chris", 45),
                 new Person("Alex", 17),
-                new Person("Susi", 22),
+                new Person("Susi", 18),
                 new Person("Tom", 15)
         );
 
@@ -23,7 +23,7 @@ class Exercise01_FilterAdultsTest {
 
         assertEquals(2, result.size());
         assertTrue(result.contains(new Person("Chris", 45)));
-        assertTrue(result.contains(new Person("Susi", 22)));
+        assertTrue(result.contains(new Person("Susi", 18)));
     }
 
     @Test
@@ -31,4 +31,12 @@ class Exercise01_FilterAdultsTest {
         List<Person> result = Exercise01_FilterAdults.filterAdults(List.of());
         assertEquals(0, result.size());
     }
+
+    @Test
+    void testWithNullList() {
+        List<Person> people = Exercise01_FilterAdults.filterAdults(null);
+        assertTrue(people.isEmpty());
+
+    }
+
 }
