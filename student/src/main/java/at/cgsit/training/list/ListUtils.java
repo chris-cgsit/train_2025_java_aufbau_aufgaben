@@ -1,6 +1,9 @@
 package at.cgsit.training.list;
 
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ListUtils {
 
@@ -33,11 +36,32 @@ public class ListUtils {
     }
 
     // -------------------------
-    // Exercise 05
+    // Exercise 05 : Alle Strings Elemente entfernen die NULL oder "" empty sind
+    // Das Ergebnis ist eine return wert eine NEUE Liste
+    // leerzeichen sollen nicht berücksichtig werden
     // -------------------------
     public static List<String> removeNullAndEmpty(List<String> input) {
-        throw new UnsupportedOperationException("TODO - implement me");
+        List<String> result = new ArrayList<>();
+
+        for (String next : input) {
+            // Apache Commons Lang hätte ein StringUtils.isBlank(s) dafür . einfacher
+            if(next == null || next.trim().isEmpty())
+                continue;
+            result.add(next);
+        }
+        return result;
     }
+    public static List<String> removeNullAndEmptyStream(List<String> input) {
+
+        List<String> result = input.stream()
+                .filter(Objects::nonNull)
+                .filter(Predicate.not(s -> s.trim().isEmpty()))
+                .collect(Collectors.toUnmodifiableList());
+
+        return result;
+    }
+
+
 
     // -------------------------
     // Exercise 06

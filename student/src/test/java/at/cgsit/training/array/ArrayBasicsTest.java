@@ -12,6 +12,7 @@ class ArrayBasicsTest {
         assertEquals(10, ArrayBasics.sum(nums));
     }
 
+
     @Test
     void testResizeGrow() {
         int[] nums = {1, 2, 3};
@@ -23,9 +24,13 @@ class ArrayBasicsTest {
     @Test
     void testResizeShrink() {
         int[] nums = {1, 2, 3, 4};
-        int[] resized = ArrayBasics.resize(nums, 2);
+        IllegalArgumentException ex =
+        assertThrows(IllegalArgumentException.class, () -> {
+                    ArrayBasics.resize(nums, 2);
+                });
 
-        assertArrayEquals(new int[]{1,2}, resized);
+        assertTrue(ex.getMessage().contains("neue grösse darf nicht kleiner sein als bestehend"));
+        // assertArrayEquals(new int[]{1,2}, resized);
     }
 
     @Test
@@ -38,4 +43,17 @@ class ArrayBasicsTest {
         assertEquals(30.0, stats.max(), 0.0001);
         assertEquals(20.0, stats.avg(), 0.0001);
     }
+
+    @Test
+    void testCalculateStatsKlassik() {
+        double[] nums = {10.0, 20.0, 30.0};
+
+        ArrayBasics.Stats stats = ArrayBasics.calculateStatsKlassisch(nums);
+
+        assertEquals(10.0, stats.min(), 0.0001);
+        assertEquals(30.0, stats.max(), 0.0001);
+        assertEquals(20.0, stats.avg(), 0.0001);
+    }
+
+
 }

@@ -64,6 +64,14 @@ class ListUtilsTest {
         assertEquals(List.of("A", "B", "C"), result);
     }
 
+    @Test
+    void testRemoveNullAndEmptyStream() {
+        List<String> input = Arrays.asList("A", null, "", " ", "B", "   ", "C");
+        List<String> result = ListUtils.removeNullAndEmptyStream(input);
+
+        assertEquals(List.of("A", "B", "C"), result);
+    }
+
     // -------------------------
     // Exercise 06
     // -------------------------
